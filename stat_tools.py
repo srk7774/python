@@ -24,3 +24,28 @@ def glimpse(df, max_width=76):
             output_combined = output_combined[0:(max_width-4)] + " ..."
 
         print(output_combined)
+
+
+def omega_sq_partial(df_model, F, N):
+    """
+    Calculate the custom statistic based on the given formula.
+    
+    Parameters:
+    df_model (float): Degrees of freedom for the model.
+    MS_model (float): Mean square for the model.
+    MS_error (float): Mean square for the error.
+    SS_model (float): Sum of squares for the model.
+    N (int): Total number of observations.
+    
+    Returns:
+    float: The calculated value of the custom statistic.
+    """
+    # Calculate the statistic according to the provided formula
+    numerator = df_model * (F - 1)
+    denominator = (df_model * (F - 1)) + N
+
+    # Handling division by zero
+    if denominator == 0:
+        return float('inf')  # Return infinity if denominator is zero
+
+    return numerator / denominator
